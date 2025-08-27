@@ -1,75 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Snake – Nettleser & iPhone</title>
-  <meta name="description" content="Et enkelt Snake-spill med tastatur og touch. Installer som app via Hjem-skjermen." />
-  <meta name="theme-color" content="#0ea5e9" />
-
-  <!-- iOS PWA friendliness -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Snake">
-  <link rel="apple-touch-icon" href="icons/icon-180.png" />
-
+  <meta name="theme-color" content="#06b6d4" />
+  <title>Catch the Fruit!</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="style.css" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
 </head>
 <body>
   <div id="app">
+    <div id="watermark">Amund er kul</div>
     <header class="topbar">
-      <h1>🐍 Snake</h1>
-      <div class="scores">
+      <div class="title">🍓 Catch the Fruit!</div>
+      <div class="hud">
         <div>Score: <span id="score">0</span></div>
         <div>Highscore: <span id="highscore">0</span></div>
+        <div>Lives: <span id="lives">3</span></div>
       </div>
     </header>
 
-    <main class="game-area">
-      <canvas id="game" width="480" height="480" aria-label="Snake spillbrett" role="img"></canvas>
+    <main class="game-shell">
+      <canvas id="game"></canvas>
 
-      <div class="controls">
-        <div class="row">
-          <button id="btn-up" class="btn btn-dir" aria-label="Opp">▲</button>
+      <div class="controls-panel">
+        <div class="controls-row">
+          <button id="startBtn" class="btn primary">Start</button>
+          <button id="pauseBtn" class="btn">Pause</button>
+          <button id="resetBtn" class="btn">Reset</button>
         </div>
-        <div class="row">
-          <button id="btn-left" class="btn btn-dir" aria-label="Venstre">◀</button>
-          <button id="btn-down" class="btn btn-dir" aria-label="Ned">▼</button>
-          <button id="btn-right" class="btn btn-dir" aria-label="Høyre">▶</button>
+        <div class="controls-row small">
+          <label for="difficulty">Vanskelighetsgrad:</label>
+          <select id="difficulty">
+            <option value="easy">Rolig</option>
+            <option value="medium" selected>Middels</option>
+            <option value="hard">Vanskelig</option>
+          </select>
+          <label for="volume">Volum:</label>
+          <select id="volume">
+            <option value="0">Av</option>
+            <option value="0.5" selected>Halv</option>
+            <option value="1">Full</option>
+          </select>
         </div>
+        <p class="hint">Bruk piltastene, trykk venstre/høyre på skjermen eller sveip. Spill fungerer offline og kan installeres på iPhone.</p>
       </div>
-
-      <section class="panel">
-        <div class="row gap">
-          <button id="startPause" class="btn btn-primary">Start</button>
-          <button id="reset" class="btn">Reset</button>
-        </div>
-        <div class="row gap">
-          <label for="speed">Hastighet:</label>
-          <select id="speed">
-            <option value="160">Rolig</option>
-            <option value="120" selected>Middels</option>
-            <option value="90">Rask</option>
-            <option value="60">Ekstra rask</option>
-          </select>
-
-          <label for="grid">Rutenett:</label>
-          <select id="grid">
-            <option value="16">Stor (16x16)</option>
-            <option value="20" selected>Normal (20x20)</option>
-            <option value="24">Liten (24x24)</option>
-          </select>
-        </div>
-        <p class="hint">
-          Tips: Bruk piltaster på tastatur. På mobil kan du sveipe eller trykke på pilknappene.
-        </p>
-      </section>
     </main>
 
-    <footer class="footer">
-      <small>Fungerer offline. Legg til på Hjem-skjermen på iPhone for app-følelse.</small>
-    </footer>
+    <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
+      <div class="overlay-content">
+        <h2 id="overlay-title">Game Over</h2>
+        <p id="overlay-msg">Du fikk <span id="final-score">0</span> poeng!</p>
+        <button id="playAgain" class="btn primary">Spill igjen</button>
+        <button id="gotoHome" class="btn">Til hovedmeny</button>
+      </div>
+    </div>
+
+    <footer class="footer">Laget med ❤️ — Fungerer offline (legg til på hjemskjermen på iPhone)</footer>
   </div>
 
   <script src="script.js"></script>

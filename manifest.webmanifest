@@ -1,11 +1,10 @@
 {
-  "name": "Snake",
-  "short_name": "Snake",
-  "description": "Snake-spill som kan installeres på iPhone via Hjem-skjermen. Fungerer offline.",
+  "name": "Catch the Fruit!",
+  "short_name": "CatchFruit",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0ea5e9",
+  "background_color": "#a7f3d0",
+  "theme_color": "#06b6d4",
   "icons": [
     {
       "src": "icons/icon-192.png",

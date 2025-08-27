@@ -1,35 +1,27 @@
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #0f172a; color: #e2e8f0; }
-#app { max-width: 960px; margin: 0 auto; padding: 16px; }
 
-.topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 16px; background: linear-gradient(90deg, #0ea5e9, #22c55e); border-radius: 20px; color: #0b1220; }
-.topbar h1 { margin: 0; font-size: 1.6rem; }
-.scores { display: flex; gap: 16px; font-weight: 700; }
+:root{--bg:#0b1220;--accent:#06b6d4;--accent2:#34d399;--text:#e6eef6}
+*{box-sizing:border-box;margin:0;padding:0}html,body,#app{height:100%}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071029,#0b1220);color:var(--text);overflow:hidden}
+#app{display:flex;flex-direction:column;max-width:1200px;margin:0 auto;padding:8px;height:100%}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:14px;color:#04202a;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.game-shell{flex:1;display:flex;gap:12px;align-items:stretch;margin-top:12px;height:calc(100vh - 200px);position:relative}
+canvas#game{flex:1;width:100%;height:100%;border-radius:12px;display:block;touch-action:none;background:linear-gradient(180deg,#60a5fa,#a7f3d0)}
+.controls-panel{width:320px;max-width:40%;background:rgba(2,6,23,0.45);padding:12px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.btn{appearance:none;border:none;padding:10px 12px;border-radius:10px;background:#111827;color:var(--text);font-weight:700;cursor:pointer;margin:4px 6px}
+.btn.primary{background:var(--accent);color:#04202a}
+.controls-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-start;margin-bottom:8px}
+.hint{color:#c7d3e0;font-size:0.9rem;margin-top:6px}.footer{text-align:center;margin-top:8px;color:#9aa9bc;font-size:0.9rem}
 
-.game-area { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
-@media (min-width: 800px) {
-  .game-area { grid-template-columns: 480px 1fr; align-items: start; }
+/* overlay */
+.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.35);backdrop-filter:blur(6px)}.overlay.hidden{display:none}
+.overlay-content{background:linear-gradient(180deg,#ffffff11,#00000055);padding:18px;border-radius:14px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,0.6);max-width:320px}
+
+/* watermark */
+#watermark{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-10deg);font-size:40px;opacity:0;color:#ffffff11;font-weight:900;pointer-events:none;z-index:0;transition:opacity 0.6s}
+#watermark.show{opacity:1;color:#ffffffcc;transition:opacity 0.4s}
+
+/* mobile layout */
+@media(max-width:800px){
+  .controls-panel{width:calc(100% - 16px);position:fixed;left:8px;right:8px;bottom:8px;opacity:0.96}
+  .game-shell{flex-direction:column;height:calc(100vh - 140px);padding-bottom:140px}
+  #watermark{font-size:32px}
 }
-
-canvas#game { width: 100%; height: auto; background: #0b1220; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); touch-action: none; }
-
-.panel { background: #111827; padding: 16px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-.row { display: flex; align-items: center; justify-content: center; }
-.row.gap { gap: 12px; flex-wrap: wrap; }
-
-.controls { display: grid; place-items: center; gap: 8px; user-select: none; }
-.controls .row { gap: 8px; }
-
-.btn { appearance: none; border: none; padding: 10px 16px; border-radius: 14px; font-size: 1rem; font-weight: 700; background: #1f2937; color: #e2e8f0; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
-.btn:hover { filter: brightness(1.08); }
-.btn:active { transform: translateY(1px); }
-.btn:focus { outline: 2px solid #22c55e55; outline-offset: 2px; }
-.btn-primary { background: #0ea5e9; color: #0b1220; }
-
-.btn-dir { width: 64px; height: 64px; font-size: 1.2rem; background: #0b1220; border: 2px solid #334155; }
-
-.footer { margin-top: 16px; text-align: center; color: #94a3b8; }
-
-.hint { color: #9ca3af; font-size: 0.95rem; margin-top: 8px; }
-select { background: #0b1220; color: #e2e8f0; border: 1px solid #334155; padding: 8px 10px; border-radius: 10px; }
-label { margin: 0 6px; }
