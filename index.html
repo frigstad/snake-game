@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Snake – Nettleser & iPhone</title>
+  <meta name="description" content="Et enkelt Snake-spill med tastatur og touch. Installer som app via Hjem-skjermen." />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- iOS PWA friendliness -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Snake">
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <h1>🐍 Snake</h1>
+      <div class="scores">
+        <div>Score: <span id="score">0</span></div>
+        <div>Highscore: <span id="highscore">0</span></div>
+      </div>
+    </header>
+
+    <main class="game-area">
+      <canvas id="game" width="480" height="480" aria-label="Snake spillbrett" role="img"></canvas>
+
+      <div class="controls">
+        <div class="row">
+          <button id="btn-up" class="btn btn-dir" aria-label="Opp">▲</button>
+        </div>
+        <div class="row">
+          <button id="btn-left" class="btn btn-dir" aria-label="Venstre">◀</button>
+          <button id="btn-down" class="btn btn-dir" aria-label="Ned">▼</button>
+          <button id="btn-right" class="btn btn-dir" aria-label="Høyre">▶</button>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="row gap">
+          <button id="startPause" class="btn btn-primary">Start</button>
+          <button id="reset" class="btn">Reset</button>
+        </div>
+        <div class="row gap">
+          <label for="speed">Hastighet:</label>
+          <select id="speed">
+            <option value="160">Rolig</option>
+            <option value="120" selected>Middels</option>
+            <option value="90">Rask</option>
+            <option value="60">Ekstra rask</option>
+          </select>
+
+          <label for="grid">Rutenett:</label>
+          <select id="grid">
+            <option value="16">Stor (16x16)</option>
+            <option value="20" selected>Normal (20x20)</option>
+            <option value="24">Liten (24x24)</option>
+          </select>
+        </div>
+        <p class="hint">
+          Tips: Bruk piltaster på tastatur. På mobil kan du sveipe eller trykke på pilknappene.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>Fungerer offline. Legg til på Hjem-skjermen på iPhone for app-følelse.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(console.error);
+      });
+    }
+  </script>
+</body>
+</html>
